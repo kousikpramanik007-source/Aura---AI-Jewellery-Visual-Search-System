@@ -1,0 +1,9 @@
+tensorflow
+faiss-cpu
+fastapi
+uvicorn
+python-multipart
+pillow
+numpy
+tqdm
+

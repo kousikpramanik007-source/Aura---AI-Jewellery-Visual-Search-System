@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura - AI Jewellery Visual Search Engine</title>
+    <meta name="description" content="Discover similar jewellery designs instantly. Upload an image to search the RingFIR collection using our state-of-the-art AI similarity engine.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/frontend/style.css">
+</head>
+<body>
+    <div class="glass-bg"></div>
+    
+    <header class="app-header">
+        <div class="container header-container">
+            <div class="logo-area">
+                <span class="logo-icon">✨</span>
+                <h1 class="brand-title">AURA</h1>
+            </div>
+            <p class="brand-tagline">AI Jewellery Visual Search Engine</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Main Search Section -->
+        <section class="search-section">
+            <div class="search-card glass-panel">
+                <div class="card-header">
+                    <h2>Find Your Perfect Match</h2>
+                    <p>Upload a photo of an earring to search the database for matching designs.</p>
+                </div>
+                
+                <div class="upload-container" id="drop-zone">
+                    <input type="file" id="file-input" accept="image/*" class="file-input-hidden">
+                    <div class="upload-placeholder" id="upload-placeholder">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <p class="upload-text-main">Drag and drop your jewellery image here</p>
+                        <p class="upload-text-sub">or click to browse from your device</p>
+                    </div>
+                    
+                    <div class="preview-container hidden" id="preview-container">
+                        <img id="image-preview" src="#" alt="Query image preview">
+                        <button type="button" class="remove-btn" id="remove-btn" aria-label="Remove image">×</button>
+                    </div>
+                </div>
+                
+                <div class="action-bar">
+                    <button type="button" id="search-btn" class="btn btn-primary" disabled>
+                        <span>Search Database</span>
+                        <div class="spinner-inline hidden" id="btn-spinner"></div>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loader State -->
+        <section class="loader-section hidden" id="loader-section">
+            <div class="loader-content">
+                <div class="premium-spinner"></div>
+                <h3>Analyzing Design Features</h3>
+                <p>Extracting embeddings and searching the FAISS vector database...</p>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section hidden" id="results-section">
+            <div class="results-header">
+                <h2>Visual Search Results</h2>
+                <span class="results-count" id="results-count">10 designs found</span>
+            </div>
+            
+            <div class="results-grid" id="results-grid">
+                <!-- Result cards will be dynamically injected here -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>© 2026 AURA Visual Intelligence. Powered by EfficientNetB0 & FAISS.</p>
+    </footer>
+
+    <!-- Image Detail Modal -->
+    <div class="modal hidden" id="detail-modal" role="dialog" aria-modal="true">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content glass-panel">
+            <button type="button" class="modal-close" id="modal-close" aria-label="Close modal">×</button>
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <img id="modal-image" src="" alt="Enlarged jewellery design">
+                </div>
+                <div class="modal-info">
+                    <h3 id="modal-title">Design Details</h3>
+                    <div class="info-row">
+                        <span class="info-label">File Path:</span>
+                        <span class="info-value" id="modal-path"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Similarity Score:</span>
+                        <span class="info-value highlighted" id="modal-similarity"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">L2 Distance:</span>
+                        <span class="info-value" id="modal-distance"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/frontend/app.js"></script>
+</body>
+</html>
