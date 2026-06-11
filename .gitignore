@@ -70,3 +70,6 @@ temp_queries/
 
 # Presentations & local docs (optional local copies)
 *.pptx
+
+DOCX_SKILL.md
+draft.md
